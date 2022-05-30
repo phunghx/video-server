@@ -20,7 +20,7 @@ from . import settings
 from .lib.logging import configure_logging
 from .lib.storage import get_media_storage
 from .celery_app import init_celery
-
+from flask_cors import CORS
 
 if os.environ.get('NEW_RELIC_LICENSE_KEY'):
     try:
@@ -94,7 +94,7 @@ def get_app(config=None):
 
     for code in default_exceptions:
         app.register_error_handler(code, make_json_error)
-
+    CORS(app)
     return app
 
 
